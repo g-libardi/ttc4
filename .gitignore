@@ -1,0 +1,13 @@
+# Python
+**/*.pyc
+**/.venv/
+**/__pycache__/
+
+# VM
+vm/result
+vm/nixos.qcow2
+vm/nixos.qcow2.zst
+vm/nixos.qcow2.zstd
+vm/nixos.qcow2.zstd.part
+vm/nixos.qcow2.zstd.part.zst
+vm/nixos.qcow2.zstd.part.zstd
