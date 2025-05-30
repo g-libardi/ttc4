@@ -30,7 +30,12 @@
 
   system.stateVersion = "24.11";
 
-  fileSystems."/mnt/hostshare" = {
+  # Create the app directory for the user
+  systemd.tmpfiles.rules = [
+    "d /home/user/app 0755 user users -"
+  ];
+
+  fileSystems."/home/user/app" = {
     fsType = "9p";
     device = "hostshare";
     options = [ "trans=virtio" "version=9p2000.L" "msize=10457600" "cache=loose" ];

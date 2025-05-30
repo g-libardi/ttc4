@@ -15,7 +15,7 @@ A topologia implementa o seguinte cenário:
 - AS1-AS3: 10.0.0.0/30 (ra1: .1, rc1: .2)
 - AS1-AS2: 10.0.0.4/30 (ra1: .5, rb1: .6)
 - AS2-AS100: 10.0.0.8/30 (rb1: .9, rx: .10)
-- AS3-AS100: 10.0.0.12/30 (rc1: .13, rx: .14)
+- AS3-AS100: 10.0.0.12/30 (rc1: .14, rx: .13)
 - AS3-AS150: 10.0.0.16/30 (rc1: .17, ry: .18)
 - AS1-AS200: 10.0.0.24/30 (ra1: .25, rw: .26)
 
@@ -63,17 +63,18 @@ ra1 ip addr show
 rc1 ip addr show
 
 # Tentar ping entre hosts (falhará - sem roteamento)
-x ping y  # Falhará - demonstra necessidade de roteamento
+x ping 192.168.150.2  # host x -> host y (falhará - demonstra necessidade de roteamento)
+x ping 192.168.200.2  # host x -> host w (falhará)
 ```
 
 ### Item 2: Roteamento (`item2_roteamento.py`)
 
-**Objetivo**: Adicionar roteamento estático simulando OSPF intra-AS e BGP inter-AS.
+**Objetivo**: Adicionar roteamento estático OSPF intra-AS e BGP inter-AS.
 
 **Funcionalidades**:
 - Todas as funcionalidades do Item 1
-- Configuração de rotas estáticas intra-AS (simulando OSPF)
-- Configuração de rotas estáticas inter-AS (simulando BGP)
+- Configuração de rotas estáticas intra-AS (OSPF)
+- Configuração de rotas estáticas inter-AS (BGP)
 - Conectividade completa entre todos os hosts
 - Análise de tabelas de roteamento
 
@@ -93,9 +94,9 @@ rb1 ip route
 rc1 ip route
 
 # Testar conectividade específica entre hosts
-x ping y  # AS100 -> AS150
-x ping w  # AS100 -> AS200
-y ping w  # AS150 -> AS200
+x ping 192.168.150.2  # AS100 -> AS150 (host x -> host y)
+x ping 192.168.200.2  # AS100 -> AS200 (host x -> host w)
+y ping 192.168.200.2  # AS150 -> AS200 (host y -> host w)
 
 # Verificar caminhos com traceroute
 x traceroute 192.168.150.2  # Caminho de x para y
@@ -178,7 +179,7 @@ pratica_01/
 ```bash
 # Conectividade
 pingall                          # Testa conectividade entre todos os nós
-x ping y                         # Ping específico entre hosts
+x ping 192.168.150.2             # Ping específico host x -> host y
 
 # Roteamento
 ra1 ip route                     # Tabela de roteamento do ra1
