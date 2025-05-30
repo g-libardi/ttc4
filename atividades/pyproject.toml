@@ -7,3 +7,6 @@ requires-python = ">=3.12"
 dependencies = [
     "mininet>=2.3.0.dev6",
 ]
+
+[project.scripts]
+item_01 = "item_01.main:run_topology"
