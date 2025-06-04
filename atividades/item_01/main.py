@@ -1,10 +1,5 @@
 #!/usr/bin/python3
 
-import time
-import sys
-import argparse
-import math
-
 from mininet.topo import Topo
 from mininet.net import Mininet
 from mininet.node import Node
@@ -13,7 +8,6 @@ from mininet.cli import CLI
 from mininet.link import TCLink
 from mininet.util import dumpNodeConnections
 from mininet.clean import cleanup
-from datetime import datetime
 
 
 class NetTopo(Topo):
